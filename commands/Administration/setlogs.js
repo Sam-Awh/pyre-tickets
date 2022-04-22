@@ -19,7 +19,8 @@ let embed = new Discord.MessageEmbed()
 .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL())
 .addField(`Channel created`, channelFetched, true)
 .addField(`Created by`, message.author, true)
-.addField(`Date`, `\`${dateFormat(new Date(), "dd/mm/yyyy - HH:MM:ss")}\``, true);
+.addField(`Date`, `\`${dateFormat(new Date(), "dd/mm/yyyy - HH:MM:ss")}\``, true)
+.setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL());
 
 db.set(`logs_${message.guild.id}`, channelFetched.id);
 channelFetched.send(message.author, {embed: embed});

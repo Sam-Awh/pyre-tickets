@@ -18,18 +18,20 @@ module.exports = async (bot, reaction, user) => {
   let already = new Discord.MessageEmbed()
   .setColor(color.red)
   .setAuthor(`⛔ | uh ohh ..`)
-  .setDescription(`You can only have one ticket open at a time.`);
+  .setDescription(`You can only have one ticket open at a time.`)
+  .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL());
 
   let success = new Discord.MessageEmbed()
-  .setColor(color.green)
-  .setTitle(`Pyre | Tickets`)
-  .setDescription(`Please explain the reason for your request. A member of the team will take care of your ticket shortly.`);
+  .setColor(color.pyre)
+  .setTitle(`Ticket Created`)
+  .setDescription(`Please explain the reason for your request. A member of the team will take care of your ticket shortly.`)
+  .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL());
 
   let split = '';
   let usr = user.id.split(split);
   for (var i = 0; i < usr.length; i++) usr[i] = usr[i].trim();
 
-  if(message.embeds.length === 1 && message.embeds[0].title === 'Pyre | Tickets' && message.embeds[0].description === 'React with 🎟️ to create a ticket.'){
+  if(message.embeds.length === 1 && message.embeds[0].title === 'Pyre | Tickets' && message.embeds[0].description === 'Create a ticket to privately message our support team regarding any related issue.'){
     if(reaction.emoji.name === "🎟️"){
       if(!message.guild.channels.cache.find(c => c.name === `ticket-${usr[0]}${usr[1]}${usr[2]}${usr[3]}`)){
 
@@ -68,8 +70,9 @@ module.exports = async (bot, reaction, user) => {
         .setAuthor(`📝 | Open ticket`)
         .setTimestamp()
         .setColor(color.pyre)
-        .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL())
+        .setFooter(`Ticket Created`, bot.user.displayAvatarURL())
         .setDescription(`A user has opened a ticket and is waiting for their request to be handled.`)
+        .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL())
         .addField(`Information`, `**User :** \`${user.tag}\`\n**ID :** \`${user.id}\`\n**Ticket :** ${channel}\n**Date :** \`${dateFormat(new Date(), "dd/mm/yyyy - HH:MM:ss")}\``);
 
         if(logsChannel) logsChannel.send(createdEmbed);

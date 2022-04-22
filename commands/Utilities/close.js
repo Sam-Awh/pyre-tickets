@@ -42,7 +42,8 @@ exports.run = async (bot, message, args, functions) => {
         let embed1 = new Discord.MessageEmbed()
         .setAuthor(`📥 | Ticket Closed`)
         .setColor(color.pyre)
-        .setDescription(`\`${message.author.tag}\` has forced your ticket to be closed.`);
+        .setDescription(`\`${message.author.tag}\` has forced your ticket to be closed.`)
+        .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL());
         db.delete(`ticket.${message.channel.name}`);
         if(logsChannel) await logsChannel.send(forceEmbed);
         if(bot.users.cache.get(db.get(`ticket.${message.channel.name}.user`))) bot.users.cache.get(db.get(`ticket.${message.channel.name}.user`)).send(embed1).catch(e => {console.log(e)})
@@ -61,9 +62,10 @@ exports.run = async (bot, message, args, functions) => {
     
         if(!message.guild.member(message.author).roles.cache.has(support.id)) return functions.errorEmbed(message, message.channel, "Sorry, you don't have the `Ticket Support` role.");
         let embed2 = new Discord.MessageEmbed()
-        .setColor(color.green)
+        .setColor(color.pyre)
         .setTitle(`🎟️ | Ticket Completed`)
-        .setDescription(`React with \\🗑️ to close the ticket or do not react if you have other requests.`);
+        .setDescription(`React with \\🗑️ to close the ticket or do not react if you have other requests.`)
+        .setFooter(`Pyre | Tickets`, bot.user.displayAvatarURL());
         if(logsChannel) await logsChannel.send(staffEmbed);
         message.channel.send(embed2).then(m => m.react(`🗑️`));
       }
