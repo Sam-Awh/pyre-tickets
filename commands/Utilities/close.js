@@ -25,7 +25,7 @@ exports.run = async (bot, message, args, functions) => {
       await message.channel.delete();
     } else {
     
-      let support = message.guild.roles.cache.find(r => r.name === "Pyre Support");
+      let support = message.guild.roles.cache.find(r => r.name === "Team Support");
       if(!support) return functions.errorEmbed(message, message.channel, "The `Pyre Support` role does not exist, please create it.");
       if(message.deletable) message.delete();
     
