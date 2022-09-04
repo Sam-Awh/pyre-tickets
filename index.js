@@ -1,22 +1,78 @@
-const Discord = require("discord.js");
-const config = require("./Storage/config.json");
-const bot = new Discord.Client({
-    disableEveryone: true,
-    autoReconnect: true,
-    disabledEvents: ["TYPING_START"],
-    partials: ['MESSAGE', 'CHANNEL', 'GUILD_MEMBER', 'REACTION']
-});
-bot.commands = new Discord.Collection();
-bot.aliases = new Discord.Collection();
-bot.event = new Discord.Collection();
+const fs = require('fs');
+const {
+  Client,
+  Collection,
+  Intents
+} = require('discord.js');
+const config = require('./config.json');
+const {
+  REST
+} = require('@discordjs/rest');
+const {
+  Routes
+} = require('discord-api-types/v9');
+const {
+  clientId
+} = require('./config.json');
+const t = require('./token.json');
 
-const loadCommands = require("./functions/commands.js");
-const loadEvents = require("./functions/events.js");
+const slashcommands = [];
+const slashcommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-const load = async () => {
-    await loadCommands.run(bot);
-    await loadEvents.run(bot);
+for (const file of slashcommandFiles) {
+  const command = require(`./commands/${file}`);
+  slashcommands.push(command.data.toJSON());
 }
 
-load();
-bot.login(config.token);
+const rest = new REST({
+  version: '9'
+}).setToken(t.token);
+
+rest.put(Routes.applicationCommands(clientId), {
+    body: slashcommands
+  })
+  .then(() => console.log('Successfully registered application commands.'))
+  .catch(console.error);
+
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
+});
+
+const Discord = require('discord.js');
+client.discord = Discord;
+client.config = config;
+
+client.commands = new Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.data.name, command);
+};
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+    client.on(event.name, (...args) => event.execute(...args, client));
+};
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isCommand()) return;
+
+
+  const command = client.commands.get(interaction.commandName);
+  if (!command) return;
+
+  try {
+    await command.execute(interaction, client, config);
+  } catch (error) {
+    console.error(error);
+    return interaction.reply({
+      content: 'There was an error while executing this command!',
+      ephemeral: true
+    });
+  };
+});
+
+client.login(t.token);

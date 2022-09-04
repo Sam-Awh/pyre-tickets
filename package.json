@@ -1,33 +1,29 @@
 {
-  "dependencies": {
-    "dateformat": "^4.6.3",
-    "discord.js": "^12.5.3",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
-    "quick.db": "^7.1.3"
-  },
   "name": "pyreworks-tickets-module",
-  "version": "1.0.0",
-  "description": "Pyre | Tickets",
+  "version": "4.0.0",
+  "description": "Pyreworks Tickets Prebuilt",
   "main": "index.js",
-  "devDependencies": {},
+  "dependencies": {
+    "@discordjs/builders": "^0.6.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "discord-api-types": "^0.24.0",
+    "discord.js": "^13.2.0",
+    "hastebin": "^0.2.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bigblackfootman/pyre-tickets.git"
+    "url": "git+https://github.com/Sam-Awh/pyre-tickets.git"
   },
   "keywords": [
-    "pyreworks",
-    "tickets",
-    "bot",
-    "lol"
+    "pyreworks"
   ],
-  "author": "Pyreworks",
-  "license": "ISC",
+  "author": "Sam-Awh",
+  "license": "SEE LICENSE IN pyreworks.com/docs",
   "bugs": {
-    "url": "https://github.com/bigblackfootman/pyre-tickets/issues"
+    "url": "https://github.com/Sam-Awh/pyre-tickets/issues"
   },
-  "homepage": "https://github.com/bigblackfootman/pyre-tickets#readme"
+  "homepage": "https://github.com/Sam-Awh/pyre-tickets#readme"
 }
