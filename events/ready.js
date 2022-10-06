@@ -1,8 +1,11 @@
 module.exports = {
   name: 'ready',
   async execute(client) {
+    client.user.setPresence({ activities: [{ name: `your tickets.`, type: 'WATCHING' }] });
+    client.user.setStatus('dnd');
     console.log('Pyre Loader is online!')
     console.log('© Pyreworks');
+
     const oniChan = client.channels.cache.get(client.config.ticketChannel)
     //uwu
     oniChan.send('https://i.ibb.co/n7RsTyR/Example-Banner11.png');
