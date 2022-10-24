@@ -1,7 +1,5 @@
 {
-  "clientId": "934722908637528124",
-
-
+  "embedColor": "FE4D29", 
   "parentOpened": "966925310337642496",
   "parentApply": "966925310337642496",
   "parentSupport": "966925310337642496",
@@ -13,6 +11,6 @@
   
   "logsTicket": "934859349006876752",
   "ticketChannel": "840144613477580822",
-
+  
   "footerText": "© Pyreworks"
 }

@@ -1,0 +1,18 @@
+{
+  "embedColor": "EMBED COLOR HEX WITHOUT #",
+  "parentOpened": "CATEGORY ID",
+  "parentApply": "CATEGORY ID",
+  "parentSupport": "CATEGORY ID",
+  "parentPartnership": "CATEGORY ID",
+  "parentOrder": "CATEGORY ID",
+
+  "parentSomethingElse": "CATEGORY ID", // just keep adding stuff like this for more ticket categories.
+
+  "roleSupport": "SUPPORT TEAM ROLE ID",
+
+  
+  "logsTicket": "TICKET LOG CHANNEL ID",
+  "ticketChannel": "TICKET CHANNEL ID",
+
+  "footerText": "YOUR FOOTER TEXT"
+}

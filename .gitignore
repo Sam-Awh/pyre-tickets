@@ -1,4 +1,3 @@
 node_modules
 .env
-token.json
 package-lock.json

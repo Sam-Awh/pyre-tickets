@@ -1,6 +1,5 @@
-const {
-  SlashCommandBuilder
-} = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const config = require('../config.json');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -8,7 +7,7 @@ module.exports = {
     .setDescription('Bot Information'),
   async execute(interaction, client) {
     const embed = new client.discord.MessageEmbed()
-      .setColor('#FE4D29')
+      .setColor(config.embedColor)
       .setAuthor('Bot Info', client.user.avatarURL())
       .setDescription('A not-so-generic ticket bot developed by **Pyreworks.**')
       .addField('Pyreworks Discord', 'Join our Discord Server to get updates or buy a product! \nhttps://discord.gg/8DMrfekBJ6',)

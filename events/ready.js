@@ -1,3 +1,5 @@
+const config = require('../config.json');
+
 module.exports = {
   name: 'ready',
   async execute(client) {
@@ -11,7 +13,7 @@ module.exports = {
     oniChan.send('https://i.ibb.co/n7RsTyR/Example-Banner11.png');
     function sendTicketMSG() {
       const embed = new client.discord.MessageEmbed()
-        .setColor('#FE4D29')
+        .setColor(config.embedColor)
         .setAuthor('Pyreworks Support', '')
         .setDescription('Need any help or have any questions? Create a ticket and go ahead following the instructions.')
         .addFields(

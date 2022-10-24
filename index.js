@@ -1,20 +1,9 @@
 const fs = require('fs');
-const {
-  Client,
-  Collection,
-  Intents
-} = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 const config = require('./config.json');
-const {
-  REST
-} = require('@discordjs/rest');
-const {
-  Routes
-} = require('discord-api-types/v9');
-const {
-  clientId
-} = require('./config.json');
-const t = require('./token.json');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+require("dotenv").config();
 
 const slashcommands = [];
 const slashcommandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -26,16 +15,20 @@ for (const file of slashcommandFiles) {
 
 const rest = new REST({
   version: '9'
-}).setToken(t.token);
+}).setToken(process.env.TOKEN);
 
-rest.put(Routes.applicationCommands(clientId), {
+rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
     body: slashcommands
   })
   .then(() => console.log('Successfully registered application commands.'))
   .catch(console.error);
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MEMBERS
+  ]
 });
 
 const Discord = require('discord.js');
@@ -75,4 +68,4 @@ client.on('interactionCreate', async interaction => {
   };
 });
 
-client.login(t.token);
+client.login(process.env.TOKEN);

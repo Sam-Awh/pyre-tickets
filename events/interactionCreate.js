@@ -1,4 +1,5 @@
 let hastebin = require('hastebin');
+const config = require('../config.json');
 
 module.exports = {
   name: 'interactionCreate',
@@ -36,7 +37,7 @@ module.exports = {
         });
 
         const embed = new client.discord.MessageEmbed()
-          .setColor('#FE4D29')
+          .setColor(config.embedColor)
           .setAuthor('Reason', ' ')
           .setDescription('Choose a reason why you opened a ticket.')
           .setFooter('© Pyreworks', ' ')
@@ -86,7 +87,7 @@ module.exports = {
             if (msg.deletable) {
               msg.delete().then(async () => {
                 const embed = new client.discord.MessageEmbed()
-                  .setColor('#FE4D29')
+                  .setColor(config.embedColor)
                   .setAuthor('Ticket', ' ')
                   .setDescription(`<@!${interaction.user.id}> has created a **Ticket** with the reason・ ${i.values[0]}`)
                   .setFooter('© Pyreworks', ' ')
@@ -201,7 +202,7 @@ module.exports = {
             })
             .then(async () => {
               const embed = new client.discord.MessageEmbed()
-                .setColor('#FE4D29')
+                .setColor(config.embedColor)
                 .setAuthor('Ticket', ' ')
                 .setDescription('```Saving transcript...```')
                 .setFooter('© Pyreworks', ' ')
@@ -264,13 +265,13 @@ module.exports = {
             const embed = new client.discord.MessageEmbed()
               .setAuthor('Ticket Logs', ' ')
               .setDescription(`📰 \`${chan.id}\` created by <@!${chan.topic}> and deleted by <@!${interaction.user.id}>\n\nTranscript: [**Click here to see the logs**](${urlToPaste})`)
-              .setColor('#FE4D29')
+              .setColor(config.embedColor)
               .setTimestamp();
 
             const embed2 = new client.discord.MessageEmbed()
               .setAuthor('Transcripts', ' ')
               .setDescription(`📰 Transcript of your ticket \`${chan.id}\`: [**Click here to see the transcript**](${urlToPaste})`)
-              .setColor('#FE4D29')
+              .setColor(config.embedColor)
               .setTimestamp();
 
             client.channels.cache.get(client.config.logsTicket).send({
