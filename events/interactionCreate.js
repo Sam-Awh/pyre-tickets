@@ -71,11 +71,11 @@ module.exports = {
             ]),
           );
 
-        msg = await c.send({
-          content: `<@!${interaction.user.id}>`,
-          embeds: [embed],
-          components: [row]
-        });
+          msg = await c.send({
+            content: `<@!${interaction.user.id}>`,
+            embeds: [embed],
+            components: [row]
+          });
 
         const collector = msg.createMessageComponentCollector({
           componentType: 'SELECT_MENU',
